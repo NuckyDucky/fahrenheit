@@ -1603,8 +1603,8 @@ public static partial class FhCall {
         => new( new FhMethodLocation("FFX.exe", 0x389CB0) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int d_FUN_0078b820(Chr* attacker, Chr* target, byte* loot, byte* record, int abort);
-    public static FhMethodHandle<d_FUN_0078b820> FUN_0078b820
+    public unsafe delegate int d_StealRoll(Chr* attacker, Chr* target, byte* loot, byte* record, int abort);
+    public static FhMethodHandle<d_StealRoll> StealRoll
         => new( new FhMethodLocation("FFX.exe", 0x38B820) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -1628,8 +1628,8 @@ public static partial class FhCall {
         => new( new FhMethodLocation("FFX.exe", 0x3AB380) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int d_FUN_007acb20(int actor);
-    public static FhMethodHandle<d_FUN_007acb20> FUN_007acb20
+    public delegate int d_ResetBuildCue(int actor);
+    public static FhMethodHandle<d_ResetBuildCue> ResetBuildCue
         => new( new FhMethodLocation("FFX.exe", 0x3ACB20) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -1648,8 +1648,8 @@ public static partial class FhCall {
         => new( new FhMethodLocation("FFX.exe", 0x46DDE0) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void d_FUN_0086e380(nint worker, nint stack, int value);
-    public static FhMethodHandle<d_FUN_0086e380> FUN_0086e380
+    public delegate void d_AtelPushInt(nint worker, nint stack, int value);
+    public static FhMethodHandle<d_AtelPushInt> AtelPushInt
         => new( new FhMethodLocation("FFX.exe", 0x46E380) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -1673,8 +1673,8 @@ public static partial class FhCall {
         => new( new FhMethodLocation("FFX.exe", 0x4DDF40) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate int d_FUN_008e24c0(int row);
-    public static FhMethodHandle<d_FUN_008e24c0> FUN_008e24c0
+    public delegate int d_MainCmdOpen(int row);
+    public static FhMethodHandle<d_MainCmdOpen> MainCmdOpen
         => new( new FhMethodLocation("FFX.exe", 0x4E24C0) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
