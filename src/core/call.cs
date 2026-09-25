@@ -608,8 +608,8 @@ public static unsafe partial class FhCall {
         new ( new FhMethodLocation(0x0353F0, 0x48CC60) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void d_TkMenuMainDeactiveMenu(int id);
-    public static FhMethodHandle<d_TkMenuMainDeactiveMenu> TkMenuMainDeactiveMenu =>
+    public delegate void d_TkMenuMainSleepMenu(int id);
+    public static FhMethodHandle<d_TkMenuMainSleepMenu> TkMenuMainSleepMenu =>
         new( new FhMethodLocation(0x4AAD20, 0x365A30) );
 
     // PUBLIC/UNRESTRICTED - END

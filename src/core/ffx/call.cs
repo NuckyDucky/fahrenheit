@@ -1648,8 +1648,8 @@ public static partial class FhCall {
         => new( new FhMethodLocation("FFX.exe", 0x46DDE0) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void d_AtelPushInt(nint worker, nint stack, int value);
-    public static FhMethodHandle<d_AtelPushInt> AtelPushInt
+    public delegate void d_AtelPushStackInteger(nint worker, nint stack, int value);
+    public static FhMethodHandle<d_AtelPushStackInteger> AtelPushStackInteger
         => new( new FhMethodLocation("FFX.exe", 0x46E380) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
