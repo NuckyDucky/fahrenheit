@@ -8987,13 +8987,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_FUN_00a5cf10> FUN_00a5cf10 => new( new FhMethodLocation("FFX.exe", 0x65CF10) );
 
     // Original after pruning:
-    // __stdcall undefined abmap_para_get_special(undefined4 param_1, int node_idx, int chr_id) at 00a5cf30
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_abmap_para_get_special(uint param_1, int node_idx, int chr_id);
-    public static FhMethodHandle<d_abmap_para_get_special> abmap_para_get_special => new( new FhMethodLocation("FFX.exe", 0x65CF30) );
-
-    // Original after pruning:
     // __stdcall undefined FUN_00a5d120(undefined4 param_1, undefined4 node_idx, ExcelElement_panel* param_3, undefined4 chr_id) at 00a5d120
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]

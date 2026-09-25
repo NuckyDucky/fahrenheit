@@ -30706,25 +30706,11 @@ public static unsafe partial class FhCall {
     // __stdcall undefined +DmgCalc_Crit(Chr* user, Chr* target, Command* command, undefined4 param_4, undefined4 damage) at 00789750
 
     // Original after pruning:
-    // __stdcall undefined MsCalcDamage(undefined4 user_id, undefined4 user, undefined4 target_id, Chr* target, undefined4 command, undefined4 command_id, undefined4 param_7, undefined4 param_8, undefined4 param_9, undefined4 param_10, undefined4 param_11) at 00789800
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsCalcDamage(uint user_id, uint user, uint target_id, nint target, uint command, uint command_id, uint param_7, uint param_8, uint param_9, uint param_10, uint param_11);
-    public static FhMethodHandle<d_MsCalcDamage> MsCalcDamage => new( new FhMethodLocation("FFX.exe", 0x389800) );
-
-    // Original after pruning:
     // unknown undefined MsCalcDamageCTB() at 00789990
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_MsCalcDamageCTB();
     public static FhMethodHandle<d_MsCalcDamageCTB> MsCalcDamageCTB => new( new FhMethodLocation("FFX.exe", 0x389990) );
-
-    // Original after pruning:
-    // __stdcall undefined MsCalcDamageCommand(Chr* user, Chr* target, Command* command, undefined4 dmg_formula, undefined4 power, StatusPermanentFlags_2 target_status_suffer, undefined4 target_stat, undefined4 should_vary, undefined4 out_defense, undefined4 out_magic_defense, int damage) at 00789cb0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsCalcDamageCommand(nint user, nint target, nint command, uint dmg_formula, uint power, nint target_status_suffer, uint target_stat, uint should_vary, uint out_defense, uint out_magic_defense, int damage);
-    public static FhMethodHandle<d_MsCalcDamageCommand> MsCalcDamageCommand => new( new FhMethodLocation("FFX.exe", 0x389CB0) );
 
     // Symbol skipped (deemed uninterpretable):
     // __stdcall undefined +DmgCalc_ApplyZombieDrainInteraction(Chr* user, Command* command, DamageInfo* info, undefined4 damage) at 0078a2c0
@@ -30786,13 +30772,6 @@ public static unsafe partial class FhCall {
 
     // Symbol skipped (deemed uninterpretable):
     // __stdcall undefined +DmgCalc_InflictStatus_Extra(int user_id, Chr* user, int target_id, Chr* target, Command* command, undefined4 param_6, undefined4 param_7, DamageInfo* info, undefined4 param_9, undefined4 param_10, undefined4 param_11) at 0078b5a0
-
-    // Original after pruning:
-    // __stdcall undefined FUN_0078b820(Chr* attacker, Chr* target, ChrLoot* target_loot, undefined4 param_4, undefined4 param_5) at 0078b820
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_FUN_0078b820(nint attacker, nint target, nint target_loot, uint param_4, uint param_5);
-    public static FhMethodHandle<d_FUN_0078b820> FUN_0078b820 => new( new FhMethodLocation("FFX.exe", 0x38B820) );
 
     // Original after pruning:
     // unknown undefined FUN_0078b9e0() at 0078b9e0
@@ -31093,13 +31072,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_MsThreatOff();
     public static FhMethodHandle<d_MsThreatOff> MsThreatOff => new( new FhMethodLocation("FFX.exe", 0x38E460) );
-
-    // Original after pruning:
-    // __stdcall undefined MsUseChrMpLimit(undefined4 chr_id) at 0078e5f0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsUseChrMpLimit(uint chr_id);
-    public static FhMethodHandle<d_MsUseChrMpLimit> MsUseChrMpLimit => new( new FhMethodLocation("FFX.exe", 0x38E5F0) );
 
     // Original after pruning:
     // unknown undefined FUN_0078e670() at 0078e670
@@ -31641,13 +31613,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_FUN_007928a0();
     public static FhMethodHandle<d_FUN_007928a0> FUN_007928a0 => new( new FhMethodLocation("FFX.exe", 0x3928A0) );
-
-    // Original after pruning:
-    // __stdcall int MsInsertBtlCommand(AttackCue* attack_cue, int param_2, int param_3, int chr_id) at 007929d0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate int d_MsInsertBtlCommand(nint attack_cue, int param_2, int param_3, int chr_id);
-    public static FhMethodHandle<d_MsInsertBtlCommand> MsInsertBtlCommand => new( new FhMethodLocation("FFX.exe", 0x3929D0) );
 
     // Original after pruning:
     // unknown undefined MsResetBtlTarget() at 00792a60
@@ -33194,13 +33159,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public unsafe delegate void d_MsSetAutoStatus(nint chr);
     public static FhMethodHandle<d_MsSetAutoStatus> MsSetAutoStatus => new( new FhMethodLocation("FFX.exe", 0x39B2A0) );
-
-    // Original after pruning:
-    // __stdcall undefined MsSetRamChr(undefined4 param_1, undefined4 chr_idx) at 0079b500
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsSetRamChr(uint param_1, uint chr_idx);
-    public static FhMethodHandle<d_MsSetRamChr> MsSetRamChr => new( new FhMethodLocation("FFX.exe", 0x39B500) );
 
     // Original after pruning:
     // unknown undefined FUN_0079c090() at 0079c090
@@ -35820,13 +35778,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_MsSetChrHeight> MsSetChrHeight => new( new FhMethodLocation("FFX.exe", 0x3AB320) );
 
     // Original after pruning:
-    // __stdcall undefined4 MsSetMotion(int param_1, int param_2, int chr_id, undefined1 param_4, undefined4 param_5, undefined4 param_6, undefined4 param_7) at 007ab380
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate uint d_MsSetMotion(int param_1, int param_2, int chr_id, byte param_4, uint param_5, uint param_6, uint param_7);
-    public static FhMethodHandle<d_MsSetMotion> MsSetMotion => new( new FhMethodLocation("FFX.exe", 0x3AB380) );
-
-    // Original after pruning:
     // unknown undefined MsSetMotionAttackWait() at 007ab520
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -35993,13 +35944,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_FUN_007ac9e0();
     public static FhMethodHandle<d_FUN_007ac9e0> FUN_007ac9e0 => new( new FhMethodLocation("FFX.exe", 0x3AC9E0) );
-
-    // Original after pruning:
-    // __stdcall int FUN_007acb20(int chr_id) at 007acb20
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate int d_FUN_007acb20(int chr_id);
-    public static FhMethodHandle<d_FUN_007acb20> FUN_007acb20 => new( new FhMethodLocation("FFX.exe", 0x3ACB20) );
 
     // Original after pruning:
     // unknown undefined FUN_007acb60() at 007acb60
@@ -36604,13 +36548,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_MsSetLimitParty> MsSetLimitParty => new( new FhMethodLocation("FFX.exe", 0x3B1AB0) );
 
     // Original after pruning:
-    // __stdcall undefined MsSetReelResult(undefined4 param_1, undefined4 param_2, undefined4 time, undefined4 start_time) at 007b1b60
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsSetReelResult(uint param_1, uint param_2, uint time, uint start_time);
-    public static FhMethodHandle<d_MsSetReelResult> MsSetReelResult => new( new FhMethodLocation("FFX.exe", 0x3B1B60) );
-
-    // Original after pruning:
     // unknown undefined FUN_007b1e50() at 007b1e50
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -36665,13 +36602,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_MsCleanInputCue();
     public static FhMethodHandle<d_MsCleanInputCue> MsCleanInputCue => new( new FhMethodLocation("FFX.exe", 0x3B20C0) );
-
-    // Original after pruning:
-    // __stdcall undefined MsDeleteInputCue(undefined4 chr_id, undefined4 param_2, undefined4 param_3, undefined4 param_4) at 007b20f0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsDeleteInputCue(uint chr_id, uint param_2, uint param_3, uint param_4);
-    public static FhMethodHandle<d_MsDeleteInputCue> MsDeleteInputCue => new( new FhMethodLocation("FFX.exe", 0x3B20F0) );
 
     // Original after pruning:
     // unknown undefined MsExeInputCue() at 007b22a0

@@ -50722,13 +50722,6 @@ public static unsafe partial class FhCall {
     public unsafe delegate void d_FUN_008AAAB0_007658D0();
     public static FhMethodHandle<d_FUN_008AAAB0_007658D0> FUN_008AAAB0_007658D0 => new( new FhMethodLocation(0x4AAAB0, 0x3658D0) );
 
-    // Fused identical entry: __stdcall undefined TkMenuMainSleepMenu(undefined4 menu_id)
-    // at (FFX.exe+8AAD20, FFX-2.exe+765A30)
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_FUN_008AAD20_00765A30(uint menu_id);
-    public static FhMethodHandle<d_FUN_008AAD20_00765A30> FUN_008AAD20_00765A30 => new( new FhMethodLocation(0x4AAD20, 0x365A30) );
-
     // Fused identical entry: unknown undefined FUN_008ab1a0()
     // at (FFX.exe+8AB1A0, FFX-2.exe+765CF0)
 

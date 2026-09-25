@@ -3720,13 +3720,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_FUN_0086dd20> FUN_0086dd20 => new( new FhMethodLocation("FFX.exe", 0x46DD20) );
 
     // Original after pruning:
-    // __stdcall float AtelPopStackFloat(AtelBasicWorker* worker, int* ref_size) at 0086dde0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate float d_AtelPopStackFloat(nint worker, int* ref_size);
-    public static FhMethodHandle<d_AtelPopStackFloat> AtelPopStackFloat => new( new FhMethodLocation("FFX.exe", 0x46DDE0) );
-
-    // Original after pruning:
     // unknown undefined FUN_0086ded0() at 0086ded0
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -3774,13 +3767,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_FUN_0086e350();
     public static FhMethodHandle<d_FUN_0086e350> FUN_0086e350 => new( new FhMethodLocation("FFX.exe", 0x46E350) );
-
-    // Original after pruning:
-    // __stdcall void FUN_0086e380(AtelBasicWorker* work, int* stack, uint worker_idx) at 0086e380
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_FUN_0086e380(nint work, int* stack, uint worker_idx);
-    public static FhMethodHandle<d_FUN_0086e380> FUN_0086e380 => new( new FhMethodLocation("FFX.exe", 0x46E380) );
 
     // Original after pruning:
     // unknown undefined FUN_0086e3b0() at 0086e3b0
@@ -10716,13 +10702,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_FUN_008a9c50> FUN_008a9c50 => new( new FhMethodLocation("FFX.exe", 0x4A9C50) );
 
     // Original after pruning:
-    // __stdcall void TkMenuMainActiveMenu(TkMenuId_4 menu_idx, int arg) at 008aa0b0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_TkMenuMainActiveMenu(nint menu_idx, int arg);
-    public static FhMethodHandle<d_TkMenuMainActiveMenu> TkMenuMainActiveMenu => new( new FhMethodLocation("FFX.exe", 0x4AA0B0) );
-
-    // Original after pruning:
     // unknown undefined FUN_008aa190() at 008aa190
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -10742,13 +10721,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_FUN_008aa240();
     public static FhMethodHandle<d_FUN_008aa240> FUN_008aa240 => new( new FhMethodLocation("FFX.exe", 0x4AA240) );
-
-    // Original after pruning:
-    // __stdcall undefined TkMenuMainFreeWindowGroup(int group) at 008aa3c0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_TkMenuMainFreeWindowGroup(int _group);
-    public static FhMethodHandle<d_TkMenuMainFreeWindowGroup> TkMenuMainFreeWindowGroup => new( new FhMethodLocation("FFX.exe", 0x4AA3C0) );
 
     // Original after pruning:
     // unknown undefined FUN_008aa400() at 008aa400
@@ -10910,13 +10882,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_FUN_008aae40();
     public static FhMethodHandle<d_FUN_008aae40> FUN_008aae40 => new( new FhMethodLocation("FFX.exe", 0x4AAE40) );
-
-    // Original after pruning:
-    // __stdcall undefined TkMenuSetHelpMessage(byte* help_msg) at 008aae60
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_TkMenuSetHelpMessage(byte* help_msg);
-    public static FhMethodHandle<d_TkMenuSetHelpMessage> TkMenuSetHelpMessage => new( new FhMethodLocation("FFX.exe", 0x4AAE60) );
 
     // Original after pruning:
     // unknown undefined FUN_008aae90() at 008aae90
@@ -17392,13 +17357,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_FUN_008ddf20> FUN_008ddf20 => new( new FhMethodLocation("FFX.exe", 0x4DDF20) );
 
     // Original after pruning:
-    // __stdcall byte* TkMenuMainHelp(TkMenuId_4 menu_id) at 008ddf40
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate byte* d_TkMenuMainHelp(nint menu_id);
-    public static FhMethodHandle<d_TkMenuMainHelp> TkMenuMainHelp => new( new FhMethodLocation("FFX.exe", 0x4DDF40) );
-
-    // Original after pruning:
     // unknown undefined FUN_008ddf60() at 008ddf60
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -17827,13 +17785,6 @@ public static unsafe partial class FhCall {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate void d_FUN_008e22a0();
     public static FhMethodHandle<d_FUN_008e22a0> FUN_008e22a0 => new( new FhMethodLocation("FFX.exe", 0x4E22A0) );
-
-    // Original after pruning:
-    // __stdcall int FUN_008e24c0(int option_idx) at 008e24c0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate int d_FUN_008e24c0(int option_idx);
-    public static FhMethodHandle<d_FUN_008e24c0> FUN_008e24c0 => new( new FhMethodLocation("FFX.exe", 0x4E24C0) );
 
     // Original after pruning:
     // unknown undefined FUN_008e2630() at 008e2630
