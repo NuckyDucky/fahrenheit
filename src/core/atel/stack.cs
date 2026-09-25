@@ -67,7 +67,7 @@ public struct AtelStack {
         AtelStackVar value = this[i].var;
 
         float x = types[i] switch {
-            AtelStackType.F32 => (int)value.as_float,
+            AtelStackType.F32 => value.as_float,
             AtelStackType.I32 => value.as_int,
             _                 => 0
         };

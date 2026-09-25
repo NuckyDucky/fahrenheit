@@ -41,7 +41,9 @@ public unsafe struct AtelScriptChunk {
     [FieldOffset(0x34)] public  ushort script_num;
     [FieldOffset(0x36)] public  ushort script_num_except_subroutines;
 
-    public ushort* script_header_offsets { get { fixed (AtelScriptChunk* address = &this) { return (ushort*)(address + 1); } } }
+    // One u32 per script, directly after the chunk header; each is an offset from the start of the chunk.
+    // The game's own lookup (FFX.exe 0x86BB10) reads it as `[chunk + index*4 + 0x38]`.
+    public uint* script_header_offsets { get { fixed (AtelScriptChunk* address = &this) { return (uint*)(address + 1); } } }
 
     public readonly ReadOnlySpan<MapEntrance> map_entrances {
         get {
