@@ -40,6 +40,6 @@ public class FhEvent<TArgs> where TArgs : allows ref struct {
             handler.Invoke(args);
         }
 
-        return _handlers.Count == 0;
+        return _handlers.Count != 0;
     }
 }
