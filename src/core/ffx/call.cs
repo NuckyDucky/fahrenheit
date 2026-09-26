@@ -1602,6 +1602,18 @@ public static partial class FhCall {
     public static FhMethodHandle<d_MsCalcDamageCommand> MsCalcDamageCommand
         => new( new FhMethodLocation("FFX.exe", 0x389CB0) );
 
+    // Crit roll for one hit: returns damage, or damage * 2 on a critical, and sets 0x100 in *flags when it crits.
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int d_FUN_00789750(Chr* user, Chr* target, Command* command, int* flags, int damage);
+    public static FhMethodHandle<d_FUN_00789750> FUN_00789750
+        => new( new FhMethodLocation("FFX.exe", 0x389750) );
+
+    // Hit roll for one hit: returns 0 on a hit, 1 on a miss, 2 on a miss against a living target.
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int d_FUN_0078a950(Chr* user, Chr* target, Command* command, byte* hit_info, int counter);
+    public static FhMethodHandle<d_FUN_0078a950> FUN_0078a950
+        => new( new FhMethodLocation("FFX.exe", 0x38A950) );
+
     // Steal roll: decides whether a Steal succeeds and writes the stolen item into the hit record. Always returns 0.
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public unsafe delegate int d_FUN_0078b820(Chr* attacker, Chr* target, byte* loot, byte* record, int abort);
@@ -1673,6 +1685,12 @@ public static partial class FhCall {
     public unsafe delegate byte* d_TkMenuMainHelp(int listIndex);
     public static FhMethodHandle<d_TkMenuMainHelp> TkMenuMainHelp
         => new( new FhMethodLocation("FFX.exe", 0x4DDF40) );
+
+    // Returns the list index of a main-menu row.
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate int d_FUN_008e2270(int row);
+    public static FhMethodHandle<d_FUN_008e2270> FUN_008e2270
+        => new( new FhMethodLocation("FFX.exe", 0x4E2270) );
 
     // Opens the page that belongs to a main-menu row.
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
