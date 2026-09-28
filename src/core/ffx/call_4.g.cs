@@ -30706,12 +30706,6 @@ public static unsafe partial class FhCall {
     // __stdcall undefined +DmgCalc_Crit(Chr* user, Chr* target, Command* command, undefined4 param_4, undefined4 damage) at 00789750
 
     // Original after pruning:
-    // __stdcall undefined MsCalcDamage(undefined4 user_id, undefined4 user, undefined4 target_id, Chr* target, undefined4 command, undefined4 command_id, undefined4 param_7, undefined4 param_8, undefined4 param_9, undefined4 param_10, undefined4 param_11) at 00789800
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsCalcDamage(uint user_id, uint user, uint target_id, nint target, uint command, uint command_id, uint param_7, uint param_8, uint param_9, uint param_10, uint param_11);
-    public static FhMethodHandle<d_MsCalcDamage> MsCalcDamage => new( new FhMethodLocation("FFX.exe", 0x389800) );
-
     // Original after pruning:
     // unknown undefined MsCalcDamageCTB() at 00789990
 
@@ -30720,12 +30714,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_MsCalcDamageCTB> MsCalcDamageCTB => new( new FhMethodLocation("FFX.exe", 0x389990) );
 
     // Original after pruning:
-    // __stdcall undefined MsCalcDamageCommand(Chr* user, Chr* target, Command* command, undefined4 dmg_formula, undefined4 power, StatusPermanentFlags_2 target_status_suffer, undefined4 target_stat, undefined4 should_vary, undefined4 out_defense, undefined4 out_magic_defense, int damage) at 00789cb0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsCalcDamageCommand(nint user, nint target, nint command, uint dmg_formula, uint power, nint target_status_suffer, uint target_stat, uint should_vary, uint out_defense, uint out_magic_defense, int damage);
-    public static FhMethodHandle<d_MsCalcDamageCommand> MsCalcDamageCommand => new( new FhMethodLocation("FFX.exe", 0x389CB0) );
-
     // Symbol skipped (deemed uninterpretable):
     // __stdcall undefined +DmgCalc_ApplyZombieDrainInteraction(Chr* user, Command* command, DamageInfo* info, undefined4 damage) at 0078a2c0
 
@@ -30887,12 +30875,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_FUN_0078c730> FUN_0078c730 => new( new FhMethodLocation("FFX.exe", 0x38C730) );
 
     // Original after pruning:
-    // unknown undefined MsCheckUseCommand() at 0078c750
-
-    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate void d_MsCheckUseCommand();
-    public static FhMethodHandle<d_MsCheckUseCommand> MsCheckUseCommand => new( new FhMethodLocation("FFX.exe", 0x38C750) );
-
     // Original after pruning:
     // unknown undefined FUN_0078cd60() at 0078cd60
 
@@ -31095,12 +31077,6 @@ public static unsafe partial class FhCall {
     public static FhMethodHandle<d_MsThreatOff> MsThreatOff => new( new FhMethodLocation("FFX.exe", 0x38E460) );
 
     // Original after pruning:
-    // __stdcall undefined MsUseChrMpLimit(undefined4 chr_id) at 0078e5f0
-
-    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    public unsafe delegate void d_MsUseChrMpLimit(uint chr_id);
-    public static FhMethodHandle<d_MsUseChrMpLimit> MsUseChrMpLimit => new( new FhMethodLocation("FFX.exe", 0x38E5F0) );
-
     // Original after pruning:
     // unknown undefined FUN_0078e670() at 0078e670
 

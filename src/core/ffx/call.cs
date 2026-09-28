@@ -1592,4 +1592,25 @@ public static partial class FhCall {
     public static FhMethodHandle<d_FMOD_EventSystem_load> FMOD_EventSystem_load
         => new( new FhMethodLocation("fmod_event.dll", "?load@EventSystem@FMOD@@QAG?AW4FMOD_RESULT@@PBDPAUFMOD_EVENT_LOADINFO@@PAPAVEventProject@2@@Z") );
 
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int d_MsCalcDamage(int attackerId, Chr* attacker, int targetId, Chr* target, Command* cmd, int comId, byte* rec, int* a8, int* a9, int* a10, int hits);
+    public static FhMethodHandle<d_MsCalcDamage> MsCalcDamage
+        => new( new FhMethodLocation("FFX.exe", 0x389800) );
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int d_MsCalcDamageCommand(Chr* user, Chr* target, Command* cmd, int formula, int power, int statusFlags, int cls, int variance, int* outDef, int* outUser, int fallback);
+    public static FhMethodHandle<d_MsCalcDamageCommand> MsCalcDamageCommand
+        => new( new FhMethodLocation("FFX.exe", 0x389CB0) );
+
+    // Returns the MP cost of the command, or -1 when the character cannot use it.
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public unsafe delegate int d_MsCheckUseCommand(int chrId, Command* cmd, int extraMp);
+    public static FhMethodHandle<d_MsCheckUseCommand> MsCheckUseCommand
+        => new( new FhMethodLocation("FFX.exe", 0x38C750) );
+
+    [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+    public delegate void d_MsUseChrMpLimit(int chrId);
+    public static FhMethodHandle<d_MsUseChrMpLimit> MsUseChrMpLimit
+        => new( new FhMethodLocation("FFX.exe", 0x38E5F0) );
+
 }
