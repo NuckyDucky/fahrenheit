@@ -1593,23 +1593,23 @@ public static partial class FhCall {
         => new( new FhMethodLocation("fmod_event.dll", "?load@EventSystem@FMOD@@QAG?AW4FMOD_RESULT@@PBDPAUFMOD_EVENT_LOADINFO@@PAPAVEventProject@2@@Z") );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int d_MsCalcDamage(int attackerId, Chr* attacker, int targetId, Chr* target, Command* cmd, int comId, byte* rec, int* a8, int* a9, int* a10, int hits);
+    public unsafe delegate int d_MsCalcDamage(int user_id, Chr* user, int target_id, Chr* target, Command* command, int command_id, byte* hit_record, int* target_hp_mp_ctb, int* hit_count, int* miss_count, int hits);
     public static FhMethodHandle<d_MsCalcDamage> MsCalcDamage
         => new( new FhMethodLocation("FFX.exe", 0x389800) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int d_MsCalcDamageCommand(Chr* user, Chr* target, Command* cmd, int formula, int power, int statusFlags, int cls, int variance, int* outDef, int* outUser, int fallback);
+    public unsafe delegate int d_MsCalcDamageCommand(Chr* user, Chr* target, Command* command, int dmg_formula, int power, int target_status_suffer, int target_stat, int should_vary, int* out_defense, int* out_magic_defense, int damage);
     public static FhMethodHandle<d_MsCalcDamageCommand> MsCalcDamageCommand
         => new( new FhMethodLocation("FFX.exe", 0x389CB0) );
 
     // Returns the MP cost of the command, or -1 when the character cannot use it.
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public unsafe delegate int d_MsCheckUseCommand(int chrId, Command* cmd, int extraMp);
+    public unsafe delegate int d_MsCheckUseCommand(int chr_id, Command* command, int extra_mp);
     public static FhMethodHandle<d_MsCheckUseCommand> MsCheckUseCommand
         => new( new FhMethodLocation("FFX.exe", 0x38C750) );
 
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-    public delegate void d_MsUseChrMpLimit(int chrId);
+    public delegate void d_MsUseChrMpLimit(int chr_id);
     public static FhMethodHandle<d_MsUseChrMpLimit> MsUseChrMpLimit
         => new( new FhMethodLocation("FFX.exe", 0x38E5F0) );
 
