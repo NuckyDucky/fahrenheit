@@ -43,8 +43,14 @@ public sealed record FhModuleContext {
 /// <summary>
 ///     Contains metadata about a given local state file, such as the version of a module last used to write to it.
 /// </summary>
+/// <param name="Version">The version of the mod that wrote the state.</param>
+/// <param name="SaveSha256">
+///     SHA-256 (uppercase hex) of the save game bytes this state was written with; null in state written before it was recorded.
+///     Fahrenheit uses it on load to pick, after an interrupted save, the state copy that belongs to the save on disk.
+/// </param>
 public sealed record FhLocalStateInfo(
-    string Version);
+    string  Version,
+    string? SaveSha256 = null);
 
 [Flags]
 public enum FhManifestFlags {

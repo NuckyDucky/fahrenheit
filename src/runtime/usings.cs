@@ -1,4 +1,4 @@
-﻿/* [fkelava 5/7/25 14:16]
+/* [fkelava 5/7/25 14:16]
  * Hexa bundles some definitions for D3D11 structures that we need to use when interfacing
  * with its API. They are defined this way because we prefer the CsWin32 definitions in all other cases.
  */
@@ -32,6 +32,7 @@ global using System.Runtime.CompilerServices; // [InlineArray], [CallConvStdcall
 global using System.Runtime.InteropServices;  // [UnmanagedFunctionPointer], [DllImport], [LibraryImport] et al.
 global using System.Runtime.Versioning;       // [SupportedOSPlatform] guard
 global using System.Text;                     // Encoding.UTF8 et al.
+global using System.Security.Cryptography;     // SHA-256 of save bytes for local state binding
 global using System.Text.Json;                // For JSON (de)serialization, we use STJ.
 global using System.Threading;                // Interlocked, Lock, et al.
 

@@ -27,6 +27,7 @@ namespace Fahrenheit.Runtime;
 public unsafe sealed class FhSaveExtensionModule : FhModule, IFhSaveSystemImpl {
 
     private int              _load_pending_slot;
+    private string?          _load_pending_sha256;
     private FhSaveSystemMode _mode;
 
     public FhSaveExtensionModule() { }
@@ -143,7 +144,7 @@ public unsafe sealed class FhSaveExtensionModule : FhModule, IFhSaveSystemImpl {
     [UnmanagedCallConv(CallConvs = [ typeof(CallConvStdcall) ] )]
     private void impl_copy() {
         FhCall.TkMenuJumpToLoadedScene.chain_from(impl_copy).fnptr!();
-        FhInternal.State.state_load_slot(_load_pending_slot);
+        FhInternal.State.state_load_slot(_load_pending_slot, _load_pending_sha256);
 
         FhApi.Events.Common.GameLoop.PostLoadGame.invoke(new() { save_slot_idx = _load_pending_slot });
     }
@@ -159,11 +160,7 @@ public unsafe sealed class FhSaveExtensionModule : FhModule, IFhSaveSystemImpl {
         string             save_path = FhApi.Saves.get_save_path_for_slot(0);
         ReadOnlySpan<byte> save      = new(ptr, size);
 
-        using (FileStream save_stream = File.OpenWrite(save_path)) {
-            save_stream.Write(save);
-        }
-
-        FhInternal.State.state_save_slot(0);
+        FhInternal.State.save_slot_with_state(0, save_path, save);
     }
 
     /* [fkelava 19/01/26 16:12]
@@ -188,11 +185,7 @@ public unsafe sealed class FhSaveExtensionModule : FhModule, IFhSaveSystemImpl {
 
         // TODO: add popups on success/failure
 
-        using (FileStream save_stream = File.OpenWrite(save_path)) {
-            save_stream.Write(save);
-        }
-
-        FhInternal.State.state_save_slot(slot);
+        FhInternal.State.save_slot_with_state(slot, save_path, save);
         signal_exit_success();
     }
 
@@ -219,7 +212,8 @@ public unsafe sealed class FhSaveExtensionModule : FhModule, IFhSaveSystemImpl {
 
         FhUtil.set_at(FhSavePal.pal_addr_force_player_rename(), player_needs_rename);
 
-        _load_pending_slot = slot;
+        _load_pending_slot   = slot;
+        _load_pending_sha256 = Convert.ToHexString(SHA256.HashData(save));
         signal_exit_success(); // TODO: popup if success
     }
 

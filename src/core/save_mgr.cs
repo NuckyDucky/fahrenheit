@@ -82,6 +82,13 @@ public sealed class FhSaves {
     /// <summary>The list of display data of saves in the active set.</summary>
     public List<FhSaveDisplayData> display_data => _sm_display_data;
 
+    /// <summary>
+    ///     While modules write local state for a save (<see cref="FhModule.save_local_state(FileStream)"/>), the SHA-256
+    ///     (uppercase hex) of the save game bytes about to be written; null at all other times. Local state is written
+    ///     before the save game itself, so a module that binds its state to the save must use this, not the file on disk.
+    /// </summary>
+    public string? pending_save_sha256 { get; internal set; }
+
     public FhSaves() {
         _sm_path_base           = Path.Join(FhEnvironment.Finder.Saves.FullName, FhInternal.Hasher.SaveSetHash);
         _sm_path_default_set    = Path.Join(_sm_path_base, FhSavePal.DEFAULT_SET_NAME, FhSavePal.pal_get_save_subfolder());
