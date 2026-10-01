@@ -62,6 +62,23 @@ public class FhBuildMapTests {
     }
 
     [Test]
+    public void untranslate_inverts_translate() {
+        FhAddressMap map = parse_ok(SAMPLE);
+
+        foreach (nint o in (nint[])[ 0x0, 0xFFF, 0x1000, 0x10FF, 0x2004, 0x200F, 0x2010, 0x202F, 0x800000, 0x8FFFFF ]) {
+            Assert.That(map.try_translate(o, out nint t), Is.True, $"0x{o:X}");
+            Assert.That(map.try_untranslate(t, out nint back), Is.True, $"0x{t:X}");
+            Assert.That(back, Is.EqualTo(o), $"0x{o:X} -> 0x{t:X} -> 0x{back:X}");
+        }
+
+        // Mapped-build offsets no segment lands on: the gap the moved subs left, and the space between them.
+        foreach (nint t in (nint[])[ 0x1100, 0x1EFF, 0x1F10, 0x1F1F, 0x1F40, 0x2000, 0x7FFFFF, 0x900000, 0x7FFFFFFF ]) {
+            Assert.That(map.try_untranslate(t, out nint back), Is.False, $"0x{t:X}");
+            Assert.That(back, Is.EqualTo(t));
+        }
+    }
+
+    [Test]
     public void expected_bytes_only_at_fn_and_sub_starts() {
         FhAddressMap map = parse_ok(SAMPLE);
 

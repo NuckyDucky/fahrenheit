@@ -49,6 +49,8 @@ public sealed class FhAddressMap {
     public ImmutableArray<FhAddressSegment> Segments          { get; }
 
     private readonly uint[]                 _old_starts;
+    private readonly uint[]                 _new_starts; // segment starts in the mapped build, sorted
+    private readonly int[]                  _by_new;     // _new_starts[i] belongs to Segments[_by_new[i]]
     private readonly Dictionary<uint, ulong> _expect_by_new;
 
     private FhAddressMap(string module, uint build_ts, uint? canonical_ts, string build_sha256, string build_id, FhAddressSegment[] segments) {
@@ -60,12 +62,18 @@ public sealed class FhAddressMap {
         Segments           = ImmutableArray.Create(segments);
 
         _old_starts    = new uint[segments.Length];
+        _new_starts    = new uint[segments.Length];
+        _by_new        = new int[segments.Length];
         _expect_by_new = [];
 
         for (int i = 0; i < segments.Length; i++) {
             _old_starts[i] = segments[i].old_offset;
+            _new_starts[i] = segments[i].new_offset;
+            _by_new[i]     = i;
             if (segments[i].has_expect8) _expect_by_new.TryAdd(segments[i].new_offset, segments[i].expect8);
         }
+
+        Array.Sort(_new_starts, _by_new);
     }
 
     /// <summary>
@@ -85,6 +93,28 @@ public sealed class FhAddressMap {
         if ((ulong)o >= (ulong)s.old_offset + s.length) return false;
 
         translated = (nint)(s.new_offset + (o - s.old_offset));
+        return true;
+    }
+
+    /// <summary>
+    ///     Finds the segment containing <paramref name="translated_offset"/> in the mapped build and returns the canonical offset
+    ///     it came from: the inverse of <see cref="try_translate"/>, for values the game holds in memory (table pointers,
+    ///     instruction operands) that are compared with canonical constants.
+    /// </summary>
+    /// <returns>False if the offset lies outside every segment; <paramref name="offset"/> is then the input.</returns>
+    public bool try_untranslate(nint translated_offset, out nint offset) {
+        offset = translated_offset;
+        if (translated_offset < 0 || (ulong)translated_offset > uint.MaxValue) return false;
+
+        uint t   = (uint)translated_offset;
+        int  idx = Array.BinarySearch(_new_starts, t);
+        if (idx < 0) idx = ~idx - 1; // last segment whose mapped start is <= t
+        if (idx < 0) return false;
+
+        FhAddressSegment s = Segments[_by_new[idx]];
+        if ((ulong)t >= (ulong)s.new_offset + s.length) return false;
+
+        offset = (nint)(s.old_offset + (t - s.new_offset));
         return true;
     }
 

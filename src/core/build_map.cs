@@ -31,6 +31,9 @@ public static unsafe class FhBuildMap {
     public const string MAP_DIR_NAME = "address-maps";
     public const string UNSUPPORTED_REPORT_NAME = "UNSUPPORTED-BUILD.txt";
 
+    /// <summary>Preferred image base of FFX.exe and FFX-2.exe; a map offset is a canonical VA minus this.</summary>
+    public const nint CANONICAL_IMAGE_BASE = 0x400000;
+
     /// <summary>FFX.exe of Steam build 753362 (SHA-256 3d13e5ed…f277e1).</summary>
     public const uint FFX_CANONICAL_TIMESTAMP  = 0x55D2F3CC;
 
@@ -177,6 +180,24 @@ public static unsafe class FhBuildMap {
     }
 
     /// <summary>
+    ///     Maps an offset of the running game's main module back to the canonical build: the inverse of
+    ///     <see cref="translate(nint)"/>, for values the game holds in memory (table pointers, instruction operands)
+    ///     that a mod compares with canonical constants. An offset outside every segment is returned unchanged.
+    /// </summary>
+    public static nint untranslate(nint translated_offset) => s_identity ? translated_offset : untranslate_main(translated_offset);
+
+    /// <summary>
+    ///     Maps an absolute address inside the running game's main module to the VA it has in the canonical build, at the
+    ///     canonical preferred image base <see cref="CANONICAL_IMAGE_BASE"/> (every map offset is VA - that base).
+    ///     An address outside the module is returned unchanged.
+    /// </summary>
+    public static nint canonical_va(nint address) {
+        nint offset = address - FhEnvironment.BaseAddr;
+        if (offset < 0 || offset >= (nint)SizeOfImage) return address;
+        return untranslate(offset) + CANONICAL_IMAGE_BASE;
+    }
+
+    /// <summary>
     ///     Translates a canonical offset in <paramref name="module"/> for the build with PE <paramref name="timestamp"/>, which
     ///     need not be the running game (e.g. the FFX-2.exe image mapped privately inside FFX). Loads the map on first use.
     /// </summary>
@@ -278,6 +299,14 @@ public static unsafe class FhBuildMap {
         return offset;
     }
 
+    private static nint untranslate_main(nint translated_offset) {
+        FhAddressMap? map = s_main_map;
+        if (map is not null && map.try_untranslate(translated_offset, out nint offset)) return offset;
+
+        note_unmapped(MainModule, translated_offset, reverse: true);
+        return translated_offset;
+    }
+
     private static FhAddressMap? get_map(string module, uint timestamp) {
         (string, uint) key = (module.ToUpperInvariant(), timestamp);
 
@@ -296,7 +325,7 @@ public static unsafe class FhBuildMap {
         return map;
     }
 
-    private static void note_unmapped(string module, nint offset) {
+    private static void note_unmapped(string module, nint offset, bool reverse = false) {
         lock (s_lock) {
             if (s_unmapped.Count > UNMAPPED_LOG_CAP) return;
             if (s_unmapped.Count == UNMAPPED_LOG_CAP) {
@@ -304,8 +333,10 @@ public static unsafe class FhBuildMap {
                 log_locked(FhLogLevel.Warning, $"build: more than {UNMAPPED_LOG_CAP} unmapped offsets; no further ones are logged");
                 return;
             }
-            if (!s_unmapped.Add((module.ToUpperInvariant(), offset))) return;
-            log_locked(FhLogLevel.Warning, $"build: {module}+0x{offset:X} is outside every map segment; used unchanged");
+            if (!s_unmapped.Add((module.ToUpperInvariant(), reverse ? -offset - 1 : offset))) return;
+            log_locked(FhLogLevel.Warning, reverse
+                ? $"build: {module}+0x{offset:X} (an offset of the running build) is outside every map segment; used unchanged"
+                : $"build: {module}+0x{offset:X} is outside every map segment; used unchanged");
         }
     }
 
