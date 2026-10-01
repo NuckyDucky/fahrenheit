@@ -139,7 +139,7 @@ internal unsafe ref struct FhPFilteredInstanceListIterator<T> where T : unmanage
 internal static unsafe class FhPhyreUtil {
 
     public static delegate* unmanaged[Thiscall]<FhPFilteredInstanceList<T>*, void> get_instance_list_filter_for<T>() where T : unmanaged {
-        return (delegate* unmanaged[Thiscall]<FhPFilteredInstanceList<T>*, void>)(FhEnvironment.BaseAddr + (0 switch {
+        return (delegate* unmanaged[Thiscall]<FhPFilteredInstanceList<T>*, void>)(FhEnvironment.BaseAddr + FhBuildMap.translate(0 switch {
             _ when typeof(T) == typeof(PTexture2D)
                 || typeof(T) == typeof(PTexture2DD3D11)
                 || typeof(T) == typeof(PTexture2DBase) => FhUtil.select(0x64FF0, 0x37D50, 0x37D50),

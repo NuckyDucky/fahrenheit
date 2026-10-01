@@ -42,7 +42,7 @@ public unsafe sealed class FhCdInterfaceModule : FhModule {
     private readonly Cd* _ptr_cd;
 
     public FhCdInterfaceModule() {
-        _ptr_cd = (Cd*)(FhEnvironment.BaseAddr + FhUtil.select(0x1F10C40, 0x16CA080, 0x16CA080));
+        _ptr_cd = (Cd*)(FhEnvironment.BaseAddr + FhBuildMap.translate(FhUtil.select(0x1F10C40, 0x16CA080, 0x16CA080)));
     }
 
     public override bool init(FhModContext mod_context, FileStream global_state_file) {

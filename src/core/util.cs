@@ -24,7 +24,7 @@ public unsafe static class FhUtil {
     /// </summary>
     /// <param name="offset">The offset, from the running game executable's base address, to return a pointer to <typeparamref name="T"/> at.</param>
     /// <returns>A pointer to a value of type <typeparamref name="T"/> at the given address.</returns>
-    public static T* ptr_at<T>(nint offset) where T : unmanaged => (T*)(FhEnvironment.BaseAddr + offset);
+    public static T* ptr_at<T>(nint offset) where T : unmanaged => (T*)(FhEnvironment.BaseAddr + FhBuildMap.translate(offset));
 
     /// <summary>
     ///     Reads a value of type <typeparamref name="T"/> from the address obtained by adding

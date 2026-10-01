@@ -33,7 +33,8 @@ internal static class FhEnvironment {
 
         Finder            = new();
         BaseAddr          = NativeLibrary.GetMainProgramHandle();
-        LoadOrder         = _init_load_order();
+        FhBuildMap.initialize();
+        LoadOrder        = _init_load_order();
         ModPaths          = _init_mod_paths();
         Manifests         = _init_manifests();
         LargeAddressAware = _init_laa();
@@ -46,6 +47,14 @@ internal static class FhEnvironment {
 
     [UnmanagedCallersOnly]
     public static void boot() {
+        /* An unsupported game build (not canonical, no address map) loads nothing: FhApi's static constructor
+         * would load every mod DLL, the runtime (fhr) included, and run module constructors, so this returns
+         * before FhApi is touched. The game then runs vanilla.
+         */
+        FhBuildMap.flush_log();
+        if (FhBuildMap.handle_unsupported(Finder.Logs.Parent ?? Finder.Logs))
+            return;
+
         FhApi.Localization.initialize();
         FhInternal.Settings.load();
         FhApi.Mods.initialize();

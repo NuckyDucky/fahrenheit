@@ -544,7 +544,7 @@ internal unsafe static class FhSavePal {
      */
 
     internal static nint pal_addr_save_mgr() {
-        return FhEnvironment.BaseAddr + FhUtil.select(0x8E81E4, 0x9EDABC, 0x9EDABC);
+        return FhEnvironment.BaseAddr + FhBuildMap.translate(FhUtil.select(0x8E81E4, 0x9EDABC, 0x9EDABC));
     }
 
     internal static nint pal_addr_buf_player_name_encoded() {

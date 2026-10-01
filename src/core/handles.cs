@@ -149,12 +149,13 @@ public readonly ref struct FhMethodLocation {
 
     /// <summary>
     ///     Obtains the absolute address of the function at <paramref name="offset"/>
-    ///     in module <paramref name="module_name"/>.
+    ///     in module <paramref name="module_name"/>. Offsets in the game executables are canonical-build
+    ///     offsets and pass through <see cref="FhBuildMap.translate(string, nint)"/>.
     /// </summary>
     private static nint calc_addr(string module_name, nint offset) {
         nint module_addr = get_module_addr(module_name);
         return module_addr != 0
-            ? (module_addr + offset)
+            ? (module_addr + FhBuildMap.translate(module_name, offset))
             : 0;
     }
 
@@ -306,6 +307,10 @@ internal sealed class FhMethods {
             FhInternal.Log.Error(e.ToString());
             return false;
         }
+
+        // On a mapped build, the first hook over a target checks the bytes the address map expects there.
+        if (pTarget == ptr_target && !FhBuildMap.verify_hook_target(ptr_target, hook.Method.Name))
+            return false;
 
         // SAFETY: &ppOriginal is used as an out parameter and stack allocated
         unsafe {
