@@ -175,11 +175,14 @@ public sealed class FhAddressMap {
             }
 
             ulong expect8     = 0;
-            bool  has_expect8 = kind is FhAddressSegmentKind.fn or FhAddressSegmentKind.sub;
+            bool  code        = kind is FhAddressSegmentKind.fn or FhAddressSegmentKind.sub;
+            // A code segment may carry no expected bytes ('-'): the generator blanks them where the loader relocates a
+            // dword inside the first 8 bytes (ASLR rewrites it in memory), and the hook check then skips that segment.
+            bool  has_expect8 = code && f[4] != "-";
 
             if (has_expect8) {
                 if (f[4].Length != 16 || !ulong.TryParse(f[4], NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out expect8)) {
-                    error = $"line {line_no}: expect8 '{f[4]}' is not 16 hex digits"; return false;
+                    error = $"line {line_no}: expect8 '{f[4]}' is not 16 hex digits or '-'"; return false;
                 }
             }
             else if (f[4] != "-") {

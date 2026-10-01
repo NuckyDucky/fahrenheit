@@ -79,7 +79,8 @@ public class FhBuildMapTests {
     [TestCase("# address-map v1\n# build 6AA2219C x y\n",                                             TestName = "missing module")]
     [TestCase("# address-map v1\n# module FFX.exe\n",                                                 TestName = "missing build")]
     [TestCase("# address-map v1\n# module FFX.exe\n# build 6AA2219C x y\n1000 1000 100 fn 558BEC83EC105356\n", TestName = "short hex")]
-    [TestCase("# address-map v1\n# module FFX.exe\n# build 6AA2219C x y\n00001000 00001000 00000100 fn -\n",    TestName = "fn without expect8")]
+    [TestCase("# address-map v1\n# module FFX.exe\n# build 6AA2219C x y\n00001000 00001000 00000100 fn 558BEC83EC10535\n", TestName = "fn with 15-digit expect8")]
+    [TestCase("# address-map v1\n# module FFX.exe\n# build 6AA2219C x y\n00001000 00001000 00000100 fn ZZ8BEC83EC105356\n", TestName = "fn with non-hex expect8")]
     [TestCase("# address-map v1\n# module FFX.exe\n# build 6AA2219C x y\n00001000 00001000 00000100 data 558BEC83EC105356\n", TestName = "data with expect8")]
     [TestCase("# address-map v1\n# module FFX.exe\n# build 6AA2219C x y\n00001000 00001000 00000100 code -\n",  TestName = "bad kind")]
     [TestCase("# address-map v1\n# module FFX.exe\n# build 6AA2219C x y\n00001000 00001000 00000000 data -\n",  TestName = "zero length")]
@@ -89,6 +90,29 @@ public class FhBuildMapTests {
     public void malformed_map_is_rejected(string text) {
         Assert.That(FhAddressMap.try_parse(text, out _, out string error), Is.False);
         Assert.That(error, Is.Not.Empty);
+    }
+
+    [Test]
+    public void code_segment_without_expected_bytes_is_accepted_and_unchecked() {
+        // strip_relocated_expect.py blanks expect8 where the loader relocates a dword inside the first 8 bytes.
+        string text = "# address-map v1\n# module FFX.exe\n# build 6AA2219C x y\n00001000 00001100 00000100 fn -\n00002000 00002000 00000010 sub -\n";
+        Assert.That(FhAddressMap.try_parse(text, out FhAddressMap? map, out string error), Is.True, error);
+        Assert.That(map!.Segments.Length, Is.EqualTo(2));
+        Assert.That(map.try_translate(0x1010, out nint t), Is.True);
+        Assert.That(t, Is.EqualTo((nint)0x1110));
+        Assert.That(map.try_expected_bytes(0x1100, out _), Is.False);
+        Assert.That(map.try_expected_bytes(0x2000, out _), Is.False);
+    }
+
+    [Test]
+    public void shipped_maps_parse() {
+        // The maps the installer ships (DESIGN 138 output, after strip_relocated_expect.py). Skipped where the checkout is absent.
+        string dir = @"C:\Users\nucky\FFX-Nuckyduck-Overhaul\install\address-maps";
+        Assume.That(Directory.Exists(dir), "overhaul checkout not present");
+        foreach (string path in Directory.GetFiles(dir, "*.map")) {
+            Assert.That(FhAddressMap.try_parse(File.ReadAllText(path), out FhAddressMap? map, out string error), Is.True, $"{Path.GetFileName(path)}: {error}");
+            Assert.That(map!.Segments.Length, Is.GreaterThan(50000), Path.GetFileName(path));
+        }
     }
 
     [Test]
